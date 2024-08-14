@@ -1,0 +1,14 @@
+mkdir -p ./data/letsencrypt/live/localhost
+mkdir -p ./data/letsencrypt-www
+mkdir -p ./data/openvas
+
+openssl genpkey -algorithm RSA -out ./data/letsencrypt/live/localhost/privkey.pem -pkeyopt rsa_keygen_bits:2048
+
+openssl req -new -x509 -key ./data/letsencrypt/live/localhost/privkey.pem -out ./data/letsencrypt/live/localhost/fullchain.pem -days 365 -subj "/CN=localhost"
+
+
+docker compose up -d 
+
+
+
+docker compose down --rmi all
